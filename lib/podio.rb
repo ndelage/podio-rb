@@ -1,5 +1,6 @@
 require 'faraday'
 require 'active_support/core_ext'
+require 'request_store'
 
 require 'podio/error'
 require 'podio/version'
@@ -19,11 +20,11 @@ module Podio
     end
 
     def client
-      Thread.current[:podio_client]
+      RequestStore.store[:podio_client]
     end
 
     def client=(new_client)
-      Thread.current[:podio_client] = new_client
+      RequestStore.store[:podio_client] = new_client
     end
 
     def with_client
